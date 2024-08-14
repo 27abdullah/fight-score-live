@@ -4,12 +4,12 @@ import { useEffect, useState } from "react";
 
 export default function ScorePage() {
   const numBlocks = 5;
-  const blocks = Array.from({ length: numBlocks }, (_, i) => i);
-  const [round, setRound] = useState(1);
+  const blocks = Array.from({ length: numBlocks }, (_, i) => i + 1);
+  const [round, setRound] = useState(5);
 
   return (
     <div className="flex items-center justify-center min-h-screen">
-      {blocks.map((_, i) => (
+      {blocks.map((i, _) => (
         <div key={i}>
           <Block id={i} round={round} />
           <Block id={i} round={round} />
@@ -34,7 +34,7 @@ function Block({ id, round }: BlockProps) {
   }, []);
 
   useEffect(() => {
-    if (round > id) {
+    if (round >= id) {
       setActive(true);
     }
   }, [round]);
@@ -46,6 +46,7 @@ function Block({ id, round }: BlockProps) {
           type="number"
           className="w-32 h-32 text-black text-center"
           value={score}
+          readOnly={id < round}
           onChange={(e) => updateScore(Number(e.target.value))}
         />
       </div>
