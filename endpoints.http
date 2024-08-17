@@ -1,0 +1,9 @@
+POST http://localhost:3000/api HTTP/1.1
+content-type: application/json
+
+{
+    "uuid": "1c769fc3-48fd-4880-a6a6-0428a96f2db3",
+    "round": 1,
+    "scoreA": 10,
+    "scoreB": 9
+}
