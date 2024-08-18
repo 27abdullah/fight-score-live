@@ -12,42 +12,52 @@ export function Block({ id, round, totalRounds }: BlockProps) {
     }
   }
 
+  function sendScore() {
+    fetch("/api", {
+      method: "POST",
+      body: JSON.stringify({
+        round: round - 1,
+        scoreA: scoreA,
+        scoreB: scoreB,
+      }),
+      headers: {
+        "Content-type": "application/json",
+      },
+    });
+  }
+
   useEffect(() => {
     setActive(round >= id);
 
-    if (round === id + 1 && round + 1 < totalRounds) {
-      fetch("/api", {
-        method: "POST",
-        body: JSON.stringify({
-          round: round,
-          scoreA: scoreA,
-          scoreB: scoreB,
-        }),
-        headers: {
-          "Content-type": "application/json",
-        },
-      });
+    // Round i is submitted when round i + 1 is active.
+    // Round 5 is submitted in "round 6".
+    if (round === id + 1 && round <= totalRounds + 1) {
+      sendScore();
     }
   }, [round]);
 
   return (
     active && (
       <div>
-        <div className={`m-7 ${id == round ? "border-2 border-red-500" : ""}`}>
+        <div
+          className={`m-7 ${id == round ? "border-4 border-green-600" : ""}`}
+        >
           <input
             name="scoreA"
             type="number"
-            className="w-32 h-32 text-black text-center"
+            className="w-32 h-32 text-black text-center text-2xl"
             value={scoreA}
             readOnly={id < round}
             onChange={(e) => updateScore(Number(e.target.value), setScoreA)}
           />
         </div>
-        <div className={`m-7 ${id == round ? "border-2 border-red-500" : ""}`}>
+        <div
+          className={`m-7 ${id == round ? "border-4 border-green-600" : ""}`}
+        >
           <input
             name="scoreB"
             type="number"
-            className="w-32 h-32 text-black text-center"
+            className="w-32 h-32 text-black text-center text-2xl"
             value={scoreB}
             readOnly={id < round}
             onChange={(e) => updateScore(Number(e.target.value), setScoreB)}
