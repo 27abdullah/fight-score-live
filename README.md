@@ -4,5 +4,7 @@ Fight Score Live is a platform where fight fans can score fights (boxing, mma, k
 
 # Start up
 docker-compose up
+
 npm run dev
+
 npx prisma studio
