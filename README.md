@@ -1,10 +1,8 @@
-ADD - small time window in which a user can send in the score (10s)
-
-npx prisma migrate dev --name fight
-npx prisma generate
+# Fight Score Live
+## WORK IN PROGRESS
+Fight Score Live is a platform where fight fans can score fights (boxing, mma, kickboxing, etc) live and see round-by-round aggregated statistics of how other users are scoring the fight.
 
 # Start up
-
-npm run dev
 docker-compose up
+npm run dev
 npx prisma studio
